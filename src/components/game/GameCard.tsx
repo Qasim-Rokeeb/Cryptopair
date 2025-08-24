@@ -34,14 +34,14 @@ export function GameCard({ card, isFlipped, isMatched, isMismatched, onClick, is
         )}
       >
         {/* Front of card */}
-        <div className="absolute w-full h-full backface-hidden rounded-lg bg-secondary/50 border-2 border-primary/20 flex items-center justify-center p-4 hover:border-primary transition-colors">
+        <div className="absolute w-full h-full backface-hidden rounded-lg bg-secondary/50 dark:bg-white/5 dark:backdrop-blur-lg border-2 border-primary/20 flex items-center justify-center p-4 hover:border-primary transition-colors">
           <Coins className="w-16 h-16 text-primary/50" />
         </div>
         {/* Back of card */}
         <div
           className={cn(
             'absolute w-full h-full backface-hidden rotate-y-180 rounded-lg flex items-center justify-center p-4 text-center',
-            isMatched ? 'bg-success/10 border-2 border-success card-glow-matched' : 'bg-secondary border-2 border-border',
+            isMatched ? 'bg-success/10 border-2 border-success card-glow-matched' : 'bg-secondary border-2 border-border dark:bg-black/10 dark:backdrop-blur-lg',
             isMismatched && '!border-destructive',
             card.type === 'term' ? 'font-headline font-bold text-lg text-foreground' : 'text-sm text-muted-foreground'
           )}
