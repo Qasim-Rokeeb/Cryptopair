@@ -11,6 +11,7 @@ import { useGameProgress } from '@/hooks/use-game-progress';
 import { Skeleton } from '@/components/ui/skeleton';
 import { GameFooter } from '@/components/game/GameFooter';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { cn } from '@/lib/utils';
 
 export type GameCardData = {
   id: string;
@@ -155,8 +156,8 @@ export default function Home() {
   }
 
   return (
-    <>
-      <div className="min-h-screen bg-background bg-grid">
+    <div className={cn("min-h-screen w-full bg-background bg-grid bg-gradient-radial-background", (dialogState !== 'none') && 'h-screen overflow-hidden')}>
+      <div className="min-h-screen">
         <header className="w-full pt-8 sm:pt-12">
           <div className="max-w-5xl mx-auto px-4 flex justify-center items-center relative">
             <div className="text-center">
@@ -203,6 +204,6 @@ export default function Home() {
         onNextLevel={handleNextLevel}
         isLastLevel={level >= gameLevels.length}
       />
-    </>
+    </div>
   );
 }

@@ -97,6 +97,10 @@
     background-size: 2rem 2rem;
   }
 
+  .bg-gradient-radial-background {
+    background: radial-gradient(circle at center, hsl(var(--primary) / 0.05), transparent 40%);
+  }
+
   .animate-shake {
     animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
     transform: translate3d(0, 0, 0);
