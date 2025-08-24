@@ -52,9 +52,9 @@ export function MatchDialog({ open, onOpenChange, term }: MatchDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[425px] bg-card border-primary card-glow-matched">
+      <DialogContent className="sm:max-w-[425px] bg-card border-green-500 card-glow-matched">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 font-headline text-2xl text-primary text-glow-primary">
+          <DialogTitle className="flex items-center gap-2 font-headline text-2xl text-green-400">
             <Gem className="w-6 h-6" />
             It's a Match!
           </DialogTitle>

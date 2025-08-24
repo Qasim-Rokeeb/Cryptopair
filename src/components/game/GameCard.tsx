@@ -39,7 +39,7 @@ export function GameCard({ card, isFlipped, isMatched, onClick, isDisabled }: Ga
         <div
           className={cn(
             'absolute w-full h-full backface-hidden rotate-y-180 rounded-lg flex items-center justify-center p-4 text-center',
-            isMatched ? 'bg-primary/10 border-2 border-primary card-glow-matched' : 'bg-secondary border-2 border-border',
+            isMatched ? 'bg-green-500/10 border-2 border-green-500 card-glow-matched' : 'bg-secondary border-2 border-border',
             card.type === 'term' ? 'font-headline font-bold text-lg text-primary-foreground' : 'text-sm text-muted-foreground'
           )}
         >
