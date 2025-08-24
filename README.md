@@ -37,6 +37,3 @@ CryptoPair is built using a modern frontend and backend technology stack:
 -   **AI Functionality**: [Genkit](https://firebase.google.com/docs/genkit) (with Google's Gemini models)
 -   **Hosting**: Firebase App Hosting
 
-## Getting Started
-
-This project was built in Firebase Studio. To get started with the code, take a look at `src/app/page.tsx`, which contains the main game logic. The game data, including all terms and definitions, can be found in `src/lib/game-data.ts`.
