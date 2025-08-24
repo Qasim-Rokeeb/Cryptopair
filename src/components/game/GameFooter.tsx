@@ -19,23 +19,23 @@ type GameFooterProps = {
 export function GameFooter({ level, setLevel, resetGame, progress, matchedPairs, totalPairs }: GameFooterProps) {
     return (
         <footer className="fixed bottom-0 left-0 right-0 z-10 bg-secondary/30 backdrop-blur-sm border-t border-border">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="container mx-auto px-4 py-3">
                 {/* Top section: Progress and Reset */}
-                <div className="flex justify-between items-center mb-4">
-                    <div className="flex items-center gap-4 w-full">
-                        <h2 className="text-sm font-headline whitespace-nowrap">Level {level} Progress</h2>
+                <div className="flex justify-between items-center mb-3">
+                    <div className="flex items-center gap-2 w-full">
+                        <h2 className="text-sm font-headline whitespace-nowrap hidden sm:block">Level {level}</h2>
                         <Progress value={progress} className="w-full" />
-                        <div className="text-sm font-headline text-right min-w-[70px]">{matchedPairs} / {totalPairs}</div>
+                        <div className="text-sm font-headline text-right min-w-[60px]">{matchedPairs} / {totalPairs}</div>
                     </div>
-                    <Button variant="outline" size="icon" onClick={resetGame} className="ml-4">
+                    <Button variant="outline" size="icon" onClick={resetGame} className="ml-2 shrink-0">
                       <RefreshCw className="h-4 w-4" />
                       <span className="sr-only">Reset Game</span>
                     </Button>
                 </div>
 
                 {/* Middle section: Level Switcher */}
-                <div className="flex justify-center items-center gap-2 flex-wrap mb-4">
-                    <p className="text-sm font-headline mr-2 hidden sm:block">Switch Level:</p>
+                <div className="flex justify-center items-center gap-1.5 flex-wrap mb-3">
+                    <p className="text-xs font-headline mr-2 hidden sm:block">Switch Level:</p>
                     {gameLevels.map((_, index) => (
                       <Button
                         key={index + 1}
@@ -43,19 +43,18 @@ export function GameFooter({ level, setLevel, resetGame, progress, matchedPairs,
                         size="sm"
                         onClick={() => setLevel(index + 1)}
                         className={cn(
-                          "font-headline h-8 w-8 sm:h-auto sm:w-auto",
+                          "font-headline h-7 w-7 p-0 sm:h-8 sm:w-8",
                            level === index + 1 && "card-glow-matched"
                         )}
                       >
-                        <span className="hidden sm:inline">{index + 1}</span>
-                         <span className="sm:hidden">{index + 1}</span>
+                        {index + 1}
                       </Button>
                     ))}
                 </div>
 
                 {/* Bottom section: Copyright and Socials */}
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-muted-foreground">
-                    <p>
+                    <p className="text-center sm:text-left">
                         © 2024 CryptoPair. All rights reserved.
                     </p>
                     <div className="flex items-center gap-3">
