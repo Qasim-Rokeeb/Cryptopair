@@ -31,7 +31,7 @@ The game is built with a modern tech stack, featuring a responsive and visually 
 CryptoPair is built using a modern frontend and backend technology stack:
 
 -   **Framework**: [Next.js](https://nextjs.org/) (with App Router)
--   **Language**: [TypeScript](https://www.typescriptlang.org/)
+
 -   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 -   **UI Components**: [ShadCN UI](https://ui.shadcn.com/)
 -   **AI Functionality**: [Genkit](https://firebase.google.com/docs/genkit) (with Google's Gemini models)
