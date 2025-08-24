@@ -9,6 +9,7 @@ import { gameLevels } from "@/lib/game-data";
 import { RefreshCw, Github, Twitter, Globe, ChevronUp } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 type GameFooterProps = {
     level: number;
@@ -83,23 +84,34 @@ export function GameFooter({ level, setLevel, resetGame, progress, matchedPairs,
                             </SheetContent>
                         </Sheet>
                     ) : (
-                        <>
-                            <p className="text-xs font-headline mr-2 hidden sm:block">Switch Level:</p>
-                            {gameLevels.map((_, index) => (
-                              <Button
-                                key={index + 1}
-                                variant={level === index + 1 ? 'default' : 'outline'}
-                                size="sm"
-                                onClick={() => handleLevelSelect(index + 1)}
-                                className={cn(
-                                  "font-headline h-7 w-7 p-0 sm:h-8 sm:w-8",
-                                   level === index + 1 && "card-glow-matched"
-                                )}
-                              >
-                                {index + 1}
-                              </Button>
-                            ))}
-                        </>
+                        <div className="w-full max-w-xs mx-auto">
+                            <Carousel opts={{
+                                align: "start",
+                                loop: false,
+                            }} className="w-full">
+                                <CarouselContent>
+                                    {gameLevels.map((_, index) => (
+                                        <CarouselItem key={index} className="basis-1/5">
+                                            <div className="p-1">
+                                                <Button
+                                                    variant={level === index + 1 ? 'default' : 'outline'}
+                                                    size="sm"
+                                                    onClick={() => handleLevelSelect(index + 1)}
+                                                    className={cn(
+                                                        "font-headline h-9 w-9 p-0",
+                                                        level === index + 1 && "card-glow-matched"
+                                                    )}
+                                                >
+                                                    {index + 1}
+                                                </Button>
+                                            </div>
+                                        </CarouselItem>
+                                    ))}
+                                </CarouselContent>
+                                <CarouselPrevious />
+                                <CarouselNext />
+                            </Carousel>
+                        </div>
                     )}
                 </div>
 
