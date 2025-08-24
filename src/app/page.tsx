@@ -163,7 +163,9 @@ export default function Home() {
             <p className="text-muted-foreground">Match the crypto terms with their definitions.</p>
           </header>
 
-          <div className="w-full bg-secondary/30 backdrop-blur-sm border border-border rounded-xl p-4 md:p-6 mb-6">
+          <GameBoard cards={cards} onCardClick={handleCardClick} isDisabled={isChecking} />
+
+          <div className="w-full bg-secondary/30 backdrop-blur-sm border border-border rounded-xl p-4 md:p-6 mt-8">
             <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
               <div className="flex items-center gap-2 flex-wrap">
                 <p className="text-sm font-headline mr-2">Level:</p>
@@ -193,7 +195,6 @@ export default function Home() {
             </div>
           </div>
 
-          <GameBoard cards={cards} onCardClick={handleCardClick} isDisabled={isChecking} />
 
           <footer className="w-full mt-12 border-t border-border/50 pt-6">
               <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
