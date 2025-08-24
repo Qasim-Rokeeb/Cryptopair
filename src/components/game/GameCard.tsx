@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from '@/lib/utils';
-import { Bitcoin } from 'lucide-react';
+import { Coins } from 'lucide-react';
 
 type GameCardProps = {
   card: {
@@ -33,7 +33,7 @@ export function GameCard({ card, isFlipped, isMatched, onClick, isDisabled }: Ga
       >
         {/* Front of card */}
         <div className="absolute w-full h-full backface-hidden rounded-lg bg-secondary/50 border-2 border-primary/20 flex items-center justify-center p-4 hover:border-primary transition-colors">
-          <Bitcoin className="w-16 h-16 text-primary/50" />
+          <Coins className="w-16 h-16 text-primary/50" />
         </div>
         {/* Back of card */}
         <div

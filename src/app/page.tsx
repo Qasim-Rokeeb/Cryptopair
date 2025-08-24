@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { Bitcoin, RefreshCw } from 'lucide-react';
+import { Coins, RefreshCw, Github, Twitter, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { GameBoard } from '@/components/game/GameBoard';
 import { MatchDialog } from '@/components/game/MatchDialog';
@@ -154,7 +154,7 @@ export default function Home() {
         <div className="w-full max-w-5xl flex flex-col">
           <header className="w-full mb-8 text-center">
             <div className="flex items-center justify-center gap-4 mb-2">
-              <Bitcoin className="w-10 h-10 text-primary text-glow-primary" />
+              <Coins className="w-10 h-10 text-primary text-glow-primary" />
               <h1 className="text-4xl md:text-5xl font-headline font-bold text-glow-primary">
                 CryptoPair
               </h1>
@@ -178,8 +178,26 @@ export default function Home() {
 
           <GameBoard cards={cards} onCardClick={handleCardClick} isDisabled={isChecking} />
 
-          <footer className="mt-8 text-muted-foreground text-sm text-center">
-              Created for learning and fun.
+          <footer className="w-full mt-12 border-t border-border/50 pt-6">
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p className="text-muted-foreground text-sm">
+                  © 2024 CryptoPair. All rights reserved.
+                </p>
+                <div className="flex items-center gap-4">
+                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                    <Github className="h-5 w-5" />
+                    <span className="sr-only">GitHub</span>
+                  </a>
+                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                    <Twitter className="h-5 w-5" />
+                    <span className="sr-only">Twitter</span>
+                  </a>
+                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                    <Globe className="h-5 w-5" />
+                    <span className="sr-only">Website</span>
+                  </a>
+                </div>
+              </div>
           </footer>
         </div>
       </main>
