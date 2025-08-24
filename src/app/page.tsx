@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
@@ -151,7 +152,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="min-h-screen bg-background bg-grid flex flex-col items-center p-4 sm:p-8">
+      <main className="min-h-screen bg-background bg-grid flex flex-col items-center p-4 sm:p-6 md:p-8">
         <div className="w-full max-w-5xl flex flex-col">
           <header className="w-full mb-8 text-center">
             <div className="flex items-center justify-center gap-4 mb-2">
