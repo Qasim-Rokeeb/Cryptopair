@@ -53,6 +53,13 @@ export function MatchDialog({ open, onOpenChange, term }: MatchDialogProps) {
     }
   }
 
+  useEffect(() => {
+    if (open) {
+      // Prefetch explanation when dialog opens
+      // You can choose to automatically fetch or just when the button is clicked
+    }
+  }, [open, term]);
+
   return (
     <Sheet open={open} onOpenChange={handleOpenChange}>
       <SheetContent side="bottom" className="sm:max-w-none md:max-w-xl mx-auto bg-card border-green-500 card-glow-matched rounded-t-lg">

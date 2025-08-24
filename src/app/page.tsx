@@ -155,8 +155,8 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col min-h-screen">
-        <header className="w-full pt-8 sm:pt-12 text-center bg-background bg-grid">
+      <div className="min-h-screen bg-background bg-grid">
+        <header className="w-full pt-8 sm:pt-12 text-center">
           <div className="max-w-5xl mx-auto px-4">
             <div className="flex items-center justify-center gap-4 mb-2">
               <Coins className="w-10 h-10 text-primary text-glow-primary" />
@@ -168,31 +168,31 @@ export default function Home() {
           </div>
         </header>
 
-        <main className="flex-grow bg-background bg-grid flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pb-48">
+        <main className="flex-grow flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pb-48">
           <div className="w-full max-w-5xl flex flex-col items-center">
             <GameBoard cards={cards} onCardClick={handleCardClick} isDisabled={isChecking} mismatchedCards={mismatchedCards} />
           </div>
         </main>
-        
-        <GameFooter 
-          level={level}
-          setLevel={setLevel}
-          resetGame={resetGame}
-          progress={progress}
-          matchedPairs={matchedPairs}
-          totalPairs={totalPairs}
-        />
       </div>
+
+      <GameFooter 
+        level={level}
+        setLevel={setLevel}
+        resetGame={resetGame}
+        progress={progress}
+        matchedPairs={matchedPairs}
+        totalPairs={totalPairs}
+      />
 
       <MatchDialog
         open={dialogState === 'match'}
-        onOpenChange={() => setDialogState('none')}
+        onOpenChange={(isOpen) => setDialogState(isOpen ? 'match' : 'none')}
         term={lastMatchedTerm}
       />
       
       <LevelCompleteDialog
         open={dialogState === 'level-complete'}
-        onOpenChange={() => setDialogState('none')}
+        onOpenChange={(isOpen) => setDialogState(isOpen ? 'level-complete' : 'none')}
         level={level}
         onNextLevel={handleNextLevel}
         isLastLevel={level >= gameLevels.length}
