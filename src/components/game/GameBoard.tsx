@@ -10,10 +10,8 @@ type GameBoardProps = {
 };
 
 export function GameBoard({ cards, onCardClick, isDisabled }: GameBoardProps) {
-  const gridCols = cards.length > 8 ? 'grid-cols-4 md:grid-cols-6' : 'grid-cols-2 md:grid-cols-4';
-
   return (
-    <div className={`grid ${gridCols} gap-4 w-full max-w-5xl mx-auto`}>
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(8rem,1fr))] gap-4 w-full max-w-5xl mx-auto sm:grid-cols-[repeat(auto-fit,minmax(10rem,1fr))]">
       {cards.map((card) => (
         <GameCard
           key={card.id}
