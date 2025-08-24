@@ -184,7 +184,7 @@ export default function Home() {
                   © 2024 CryptoPair. All rights reserved.
                 </p>
                 <div className="flex items-center gap-4">
-                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                  <a href="https://github.com/Qasim-Rokeeb" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                     <Github className="h-5 w-5" />
                     <span className="sr-only">GitHub</span>
                   </a>
