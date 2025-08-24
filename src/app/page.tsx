@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { Coins, RefreshCw, Github, Twitter, Globe } from 'lucide-react';
+import { Coins, RefreshCw, Github, Twitter, Globe, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { GameBoard } from '@/components/game/GameBoard';
 import { MatchDialog } from '@/components/game/MatchDialog';
@@ -10,6 +10,13 @@ import { getLevelData, gameLevels } from '@/lib/game-data';
 import { useGameProgress } from '@/hooks/use-game-progress';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Progress } from '@/components/ui/progress';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export type GameCardData = {
   id: string;
@@ -127,6 +134,13 @@ export default function Home() {
     setDialogState('none');
   };
 
+  const handleLevelChange = (levelString: string) => {
+    const newLevel = parseInt(levelString, 10);
+    if (!isNaN(newLevel)) {
+      setLevel(newLevel);
+    }
+  };
+
   const resetGame = () => {
     initializeGame(level);
   }
@@ -164,7 +178,20 @@ export default function Home() {
 
           <div className="w-full bg-secondary/30 backdrop-blur-sm border border-border rounded-xl p-4 md:p-6 mb-6">
             <div className="flex justify-between items-center mb-4">
-              <div className="text-lg font-headline">Level: <span className="text-primary font-bold text-xl">{level}</span></div>
+              <div className="flex items-center gap-2">
+                <Select value={level.toString()} onValueChange={handleLevelChange}>
+                  <SelectTrigger className="w-[180px] font-headline">
+                    <SelectValue placeholder="Select level" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {gameLevels.map((_, index) => (
+                      <SelectItem key={index + 1} value={(index + 1).toString()}>
+                        Level {index + 1}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               <Button variant="outline" size="icon" onClick={resetGame}>
                   <RefreshCw className="h-4 w-4" />
                   <span className="sr-only">Reset Game</span>
