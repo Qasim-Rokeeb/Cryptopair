@@ -35,5 +35,4 @@ CryptoPair is built using a modern frontend and backend technology stack:
 -   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 -   **UI Components**: [ShadCN UI](https://ui.shadcn.com/)
 -   **AI Functionality**: [Genkit](https://firebase.google.com/docs/genkit) (with Google's Gemini models)
--   **Hosting**: Firebase App Hosting
 
