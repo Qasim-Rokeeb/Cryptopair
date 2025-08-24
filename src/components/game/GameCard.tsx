@@ -11,11 +11,12 @@ type GameCardProps = {
   };
   isFlipped: boolean;
   isMatched: boolean;
+  isMismatched: boolean;
   onClick: (id: string) => void;
   isDisabled: boolean;
 };
 
-export function GameCard({ card, isFlipped, isMatched, onClick, isDisabled }: GameCardProps) {
+export function GameCard({ card, isFlipped, isMatched, isMismatched, onClick, isDisabled }: GameCardProps) {
   const handleClick = () => {
     if (!isFlipped && !isMatched && !isDisabled) {
       onClick(card.id);
@@ -23,7 +24,7 @@ export function GameCard({ card, isFlipped, isMatched, onClick, isDisabled }: Ga
   };
 
   return (
-    <div className="perspective" onClick={handleClick}>
+    <div className={cn("perspective", isMismatched && "animate-shake")} onClick={handleClick}>
       <div
         className={cn(
           'relative w-full h-full min-h-[12rem] rounded-lg preserve-3d transition-transform duration-500 ease-in-out',
@@ -40,6 +41,7 @@ export function GameCard({ card, isFlipped, isMatched, onClick, isDisabled }: Ga
           className={cn(
             'absolute w-full h-full backface-hidden rotate-y-180 rounded-lg flex items-center justify-center p-4 text-center',
             isMatched ? 'bg-green-500/10 border-2 border-green-500 card-glow-matched' : 'bg-secondary border-2 border-border',
+            isMismatched && '!border-destructive',
             card.type === 'term' ? 'font-headline font-bold text-lg text-primary-foreground' : 'text-sm text-muted-foreground'
           )}
         >

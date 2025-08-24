@@ -36,6 +36,7 @@ export default function Home() {
   const [selectedCards, setSelectedCards] = useState<GameCardData[]>([]);
   const [isChecking, setIsChecking] = useState(false);
   const [matchedPairs, setMatchedPairs] = useState(0);
+  const [mismatchedCards, setMismatchedCards] = useState<string[]>([]);
 
   const [dialogState, setDialogState] = useState<'none' | 'match' | 'level-complete'>('none');
   const [lastMatchedTerm, setLastMatchedTerm] = useState('');
@@ -59,6 +60,7 @@ export default function Home() {
     setMatchedPairs(0);
     setIsChecking(false);
     setDialogState('none');
+    setMismatchedCards([]);
   }, [setLevel]);
 
   useEffect(() => {
@@ -73,6 +75,7 @@ export default function Home() {
     const clickedCard = cards.find(c => c.id === id);
     if (!clickedCard || clickedCard.isFlipped || clickedCard.isMatched) return;
 
+    setMismatchedCards([]);
     const newCards = cards.map(c => (c.id === id ? { ...c, isFlipped: true } : c));
     setCards(newCards);
     setSelectedCards([...selectedCards, { ...clickedCard, isFlipped: true }]);
@@ -97,6 +100,7 @@ export default function Home() {
         }, 500);
       } else {
         // Not a match
+        setMismatchedCards([first.id, second.id]);
         setTimeout(() => {
           setCards(prevCards =>
             prevCards.map(c =>
@@ -105,6 +109,7 @@ export default function Home() {
           );
           setSelectedCards([]);
           setIsChecking(false);
+          setMismatchedCards([]);
         }, 1200);
       }
     }
@@ -165,7 +170,7 @@ export default function Home() {
 
         <main className="flex-grow bg-background bg-grid flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pb-48">
           <div className="w-full max-w-5xl flex flex-col items-center">
-            <GameBoard cards={cards} onCardClick={handleCardClick} isDisabled={isChecking} />
+            <GameBoard cards={cards} onCardClick={handleCardClick} isDisabled={isChecking} mismatchedCards={mismatchedCards} />
           </div>
         </main>
         

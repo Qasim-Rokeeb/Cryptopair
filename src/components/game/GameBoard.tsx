@@ -7,9 +7,10 @@ type GameBoardProps = {
   cards: GameCardData[];
   onCardClick: (id: string) => void;
   isDisabled: boolean;
+  mismatchedCards: string[];
 };
 
-export function GameBoard({ cards, onCardClick, isDisabled }: GameBoardProps) {
+export function GameBoard({ cards, onCardClick, isDisabled, mismatchedCards }: GameBoardProps) {
   return (
     <div className="grid grid-cols-[repeat(auto-fit,minmax(8rem,1fr))] gap-4 w-full max-w-5xl mx-auto sm:grid-cols-[repeat(auto-fit,minmax(10rem,1fr))]">
       {cards.map((card) => (
@@ -18,6 +19,7 @@ export function GameBoard({ cards, onCardClick, isDisabled }: GameBoardProps) {
           card={card}
           isFlipped={card.isFlipped}
           isMatched={card.isMatched}
+          isMismatched={mismatchedCards.includes(card.id)}
           onClick={onCardClick}
           isDisabled={isDisabled}
         />
