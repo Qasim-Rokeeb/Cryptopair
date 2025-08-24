@@ -10,6 +10,7 @@ import { getLevelData, gameLevels } from '@/lib/game-data';
 import { useGameProgress } from '@/hooks/use-game-progress';
 import { Skeleton } from '@/components/ui/skeleton';
 import { GameFooter } from '@/components/game/GameFooter';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 export type GameCardData = {
   id: string;
@@ -156,15 +157,20 @@ export default function Home() {
   return (
     <>
       <div className="min-h-screen bg-background bg-grid">
-        <header className="w-full pt-8 sm:pt-12 text-center">
-          <div className="max-w-5xl mx-auto px-4">
-            <div className="flex items-center justify-center gap-4 mb-2">
-              <Coins className="w-10 h-10 text-primary text-glow-primary" />
-              <h1 className="text-4xl md:text-5xl font-headline font-bold text-glow-primary">
-                CryptoPair
-              </h1>
+        <header className="w-full pt-8 sm:pt-12">
+          <div className="max-w-5xl mx-auto px-4 flex justify-center items-center relative">
+            <div className="text-center">
+                <div className="flex items-center justify-center gap-4 mb-2">
+                    <Coins className="w-10 h-10 text-primary text-glow-primary" />
+                    <h1 className="text-4xl md:text-5xl font-headline font-bold text-glow-primary">
+                        CryptoPair
+                    </h1>
+                </div>
+                <p className="text-muted-foreground">Match the crypto terms with their definitions.</p>
             </div>
-            <p className="text-muted-foreground">Match the crypto terms with their definitions.</p>
+            <div className="absolute top-0 right-4">
+                <ThemeToggle />
+            </div>
           </div>
         </header>
 
