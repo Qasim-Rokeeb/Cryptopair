@@ -231,6 +231,57 @@ export const gameLevels: Term[][] = [
       definition: 'Non-transferable tokens representing a person\'s identity, credentials, and affiliations in a decentralized society.',
     },
   ],
+  // Level 7: 12 pairs
+  [
+    {
+      term: 'Staking',
+      definition: 'The process of actively participating in transaction validation on a proof-of-stake (PoS) blockchain to earn rewards.',
+    },
+    {
+      term: 'DAO Governance',
+      definition: 'The process by which members of a Decentralized Autonomous Organization collectively make decisions about the protocol.',
+    },
+    {
+      term: 'Fork',
+      definition: 'A change in a blockchain\'s protocol. This can be a "soft fork" (backward-compatible) or a "hard fork" (not backward-compatible).',
+    },
+    {
+      term: 'Initial Exchange Offering (IEO)',
+      definition: 'A fundraising model where a cryptocurrency exchange oversees the sale of tokens, similar to an ICO but managed by an exchange.',
+    },
+    {
+      term: 'Know Your Customer (KYC)',
+      definition: 'A standard in the financial industry that requires institutions to verify the identity of their clients.',
+    },
+    {
+      term: 'Market Cap',
+      definition: 'The total value of a cryptocurrency, calculated by multiplying the price of a single coin by the total number of coins in circulation.',
+    },
+    {
+      term: 'Pump and Dump',
+      definition: 'A scheme that attempts to boost the price of a stock or security through false recommendations based on false or misleading statements.',
+    },
+    {
+      term: 'Shill',
+      definition: 'The act of enthusiastically promoting a cryptocurrency or a crypto project, often for personal gain.',
+    },
+    {
+      term: 'Vaporware',
+      definition: 'A software or hardware project that is announced to the general public but is never actually manufactured nor officially cancelled.',
+    },
+    {
+      term: 'Whitepaper',
+      definition: 'An authoritative report or guide that informs readers concisely about a complex issue and presents the issuing body\'s philosophy on the matter.',
+    },
+    {
+      term: 'Testnet',
+      definition: 'An alternative blockchain used for testing. Testnet coins are separate and distinct from official coins and have no value.',
+    },
+    {
+      term: 'Mainnet',
+      definition: 'The main network where actual transactions take place and are recorded on the blockchain.',
+    },
+  ],
 ];
 
 export const getLevelData = (level: number): Term[] | null => {
