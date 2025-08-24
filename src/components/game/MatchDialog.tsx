@@ -75,7 +75,7 @@ export function MatchDialog({ open, onOpenChange, term }: MatchDialogProps) {
         {error && <p className="text-destructive text-sm">{error}</p>}
         
         {explanation && (
-            <ScrollArea className="max-h-[300px] my-4 p-4 border rounded-md bg-background/50">
+            <ScrollArea className="max-h-[30vh] my-4 p-4 border rounded-md bg-background/50">
                 <p className="text-sm">{explanation}</p>
             </ScrollArea>
         )}
