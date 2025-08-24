@@ -33,7 +33,7 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 };
 
 export default function Home() {
-  const { level, setLevel, isLoaded } = useGameProgress();
+  const { level, setLevel, isLoaded, highestUnlockedLevel, unlockLevel } = useGameProgress();
   const [cards, setCards] = useState<GameCardData[]>([]);
   const [selectedCards, setSelectedCards] = useState<GameCardData[]>([]);
   const [isChecking, setIsChecking] = useState(false);
@@ -120,10 +120,14 @@ export default function Home() {
   useEffect(() => {
     if (totalPairs > 0 && matchedPairs === totalPairs) {
         setTimeout(() => {
+            const nextLevel = level + 1;
+            if (nextLevel <= gameLevels.length) {
+              unlockLevel(nextLevel);
+            }
             setDialogState('level-complete');
         }, 800)
     }
-  }, [matchedPairs, totalPairs]);
+  }, [matchedPairs, totalPairs, level, unlockLevel]);
 
 
   const handleNextLevel = () => {
@@ -189,6 +193,7 @@ export default function Home() {
         progress={progress}
         matchedPairs={matchedPairs}
         totalPairs={totalPairs}
+        highestUnlockedLevel={highestUnlockedLevel}
       />
 
       <MatchDialog

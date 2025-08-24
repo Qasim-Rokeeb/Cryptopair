@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { gameLevels } from "@/lib/game-data";
-import { RefreshCw, Github, Twitter, Globe, ChevronUp } from "lucide-react";
+import { RefreshCw, Github, Twitter, Globe, ChevronUp, Lock } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -18,13 +18,15 @@ type GameFooterProps = {
     progress: number;
     matchedPairs: number;
     totalPairs: number;
+    highestUnlockedLevel: number;
 };
 
-export function GameFooter({ level, setLevel, resetGame, progress, matchedPairs, totalPairs }: GameFooterProps) {
+export function GameFooter({ level, setLevel, resetGame, progress, matchedPairs, totalPairs, highestUnlockedLevel }: GameFooterProps) {
     const isMobile = useIsMobile();
     const [isSheetOpen, setSheetOpen] = useState(false);
 
     const handleLevelSelect = (newLevel: number) => {
+        if (newLevel > highestUnlockedLevel) return;
         setLevel(newLevel);
         if (isMobile) {
             setSheetOpen(false);
@@ -33,20 +35,26 @@ export function GameFooter({ level, setLevel, resetGame, progress, matchedPairs,
 
     const LevelSelectorContent = () => (
         <div className="flex flex-wrap justify-center gap-2 p-4">
-            {gameLevels.map((_, index) => (
+            {gameLevels.map((_, index) => {
+              const levelNum = index + 1;
+              const isLocked = levelNum > highestUnlockedLevel;
+              return (
               <Button
-                key={index + 1}
-                variant={level === index + 1 ? 'default' : 'outline'}
+                key={levelNum}
+                variant={level === levelNum ? 'default' : 'outline'}
                 size="lg"
-                onClick={() => handleLevelSelect(index + 1)}
+                onClick={() => handleLevelSelect(levelNum)}
+                disabled={isLocked}
                 className={cn(
-                  "font-headline h-12 w-12 text-lg",
-                   level === index + 1 && "card-glow-matched"
+                  "font-headline h-12 w-12 text-lg relative",
+                   level === levelNum && "card-glow-matched",
+                   isLocked && "grayscale blur-sm pointer-events-none"
                 )}
               >
-                {index + 1}
+                {isLocked && <Lock className="absolute w-5 h-5 z-10" />}
+                {levelNum}
               </Button>
-            ))}
+            )})}
         </div>
     );
 
@@ -90,23 +98,29 @@ export function GameFooter({ level, setLevel, resetGame, progress, matchedPairs,
                                 loop: false,
                             }} className="w-full">
                                 <CarouselContent>
-                                    {gameLevels.map((_, index) => (
+                                    {gameLevels.map((_, index) => {
+                                        const levelNum = index + 1;
+                                        const isLocked = levelNum > highestUnlockedLevel;
+                                        return (
                                         <CarouselItem key={index} className="basis-1/5">
                                             <div className="p-1">
                                                 <Button
-                                                    variant={level === index + 1 ? 'default' : 'outline'}
+                                                    variant={level === levelNum ? 'default' : 'outline'}
                                                     size="sm"
-                                                    onClick={() => handleLevelSelect(index + 1)}
+                                                    onClick={() => handleLevelSelect(levelNum)}
+                                                    disabled={isLocked}
                                                     className={cn(
-                                                        "font-headline h-9 w-9 p-0",
-                                                        level === index + 1 && "card-glow-matched"
+                                                        "font-headline h-9 w-9 p-0 relative",
+                                                        level === levelNum && "card-glow-matched",
+                                                        isLocked && "grayscale blur-sm pointer-events-none"
                                                     )}
                                                 >
-                                                    {index + 1}
+                                                    {isLocked && <Lock className="absolute w-4 h-4 z-10" />}
+                                                    {levelNum}
                                                 </Button>
                                             </div>
                                         </CarouselItem>
-                                    ))}
+                                    )})}
                                 </CarouselContent>
                                 <CarouselPrevious />
                                 <CarouselNext />
