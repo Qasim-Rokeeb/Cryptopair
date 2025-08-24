@@ -1,6 +1,7 @@
+
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Sheet,
   SheetContent,
@@ -40,18 +41,20 @@ export function MatchDialog({ open, onOpenChange, term }: MatchDialogProps) {
     }
   };
 
-  const handleClose = () => {
-    onOpenChange(false);
-    // Reset state after dialog closes
-    setTimeout(() => {
-        setExplanation('');
-        setError('');
-        setIsLoading(false);
-    }, 300);
+  const handleOpenChange = (isOpen: boolean) => {
+    onOpenChange(isOpen);
+    if (!isOpen) {
+        // Reset state after dialog closes
+        setTimeout(() => {
+            setExplanation('');
+            setError('');
+            setIsLoading(false);
+        }, 300);
+    }
   }
 
   return (
-    <Sheet open={open} onOpenChange={handleClose}>
+    <Sheet open={open} onOpenChange={handleOpenChange}>
       <SheetContent side="bottom" className="sm:max-w-none md:max-w-xl mx-auto bg-card border-green-500 card-glow-matched rounded-t-lg">
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2 font-headline text-2xl text-green-400">
@@ -84,7 +87,7 @@ export function MatchDialog({ open, onOpenChange, term }: MatchDialogProps) {
                     Learn More
                 </Button>
             )}
-          <Button type="button" variant="secondary" onClick={handleClose}>
+          <Button type="button" variant="secondary" onClick={() => handleOpenChange(false)}>
             Continue
           </Button>
         </SheetFooter>
