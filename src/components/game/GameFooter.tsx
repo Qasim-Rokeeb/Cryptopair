@@ -1,11 +1,14 @@
 
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { gameLevels } from "@/lib/game-data";
-import { RefreshCw, Github, Twitter, Globe } from "lucide-react";
+import { RefreshCw, Github, Twitter, Globe, ChevronUp } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 type GameFooterProps = {
     level: number;
@@ -17,6 +20,35 @@ type GameFooterProps = {
 };
 
 export function GameFooter({ level, setLevel, resetGame, progress, matchedPairs, totalPairs }: GameFooterProps) {
+    const isMobile = useIsMobile();
+    const [isSheetOpen, setSheetOpen] = useState(false);
+
+    const handleLevelSelect = (newLevel: number) => {
+        setLevel(newLevel);
+        if (isMobile) {
+            setSheetOpen(false);
+        }
+    }
+
+    const LevelSelectorContent = () => (
+        <div className="flex flex-wrap justify-center gap-2 p-4">
+            {gameLevels.map((_, index) => (
+              <Button
+                key={index + 1}
+                variant={level === index + 1 ? 'default' : 'outline'}
+                size="lg"
+                onClick={() => handleLevelSelect(index + 1)}
+                className={cn(
+                  "font-headline h-12 w-12 text-lg",
+                   level === index + 1 && "card-glow-matched"
+                )}
+              >
+                {index + 1}
+              </Button>
+            ))}
+        </div>
+    );
+
     return (
         <footer className="fixed bottom-0 left-0 right-0 z-10 bg-secondary/30 backdrop-blur-sm border-t border-border">
             <div className="container mx-auto px-4 py-3">
@@ -35,21 +67,40 @@ export function GameFooter({ level, setLevel, resetGame, progress, matchedPairs,
 
                 {/* Middle section: Level Switcher */}
                 <div className="flex justify-center items-center gap-1.5 flex-wrap mb-3">
-                    <p className="text-xs font-headline mr-2 hidden sm:block">Switch Level:</p>
-                    {gameLevels.map((_, index) => (
-                      <Button
-                        key={index + 1}
-                        variant={level === index + 1 ? 'default' : 'outline'}
-                        size="sm"
-                        onClick={() => setLevel(index + 1)}
-                        className={cn(
-                          "font-headline h-7 w-7 p-0 sm:h-8 sm:w-8",
-                           level === index + 1 && "card-glow-matched"
-                        )}
-                      >
-                        {index + 1}
-                      </Button>
-                    ))}
+                    {isMobile ? (
+                         <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
+                            <SheetTrigger asChild>
+                                <Button variant="outline" className="w-full sm:w-auto font-headline">
+                                    <ChevronUp className="mr-2 h-4 w-4" />
+                                    Switch Level
+                                </Button>
+                            </SheetTrigger>
+                            <SheetContent side="bottom" className="rounded-t-lg">
+                                <SheetHeader>
+                                    <SheetTitle className="font-headline text-center">Select Level</SheetTitle>
+                                </SheetHeader>
+                                <LevelSelectorContent />
+                            </SheetContent>
+                        </Sheet>
+                    ) : (
+                        <>
+                            <p className="text-xs font-headline mr-2 hidden sm:block">Switch Level:</p>
+                            {gameLevels.map((_, index) => (
+                              <Button
+                                key={index + 1}
+                                variant={level === index + 1 ? 'default' : 'outline'}
+                                size="sm"
+                                onClick={() => handleLevelSelect(index + 1)}
+                                className={cn(
+                                  "font-headline h-7 w-7 p-0 sm:h-8 sm:w-8",
+                                   level === index + 1 && "card-glow-matched"
+                                )}
+                              >
+                                {index + 1}
+                              </Button>
+                            ))}
+                        </>
+                    )}
                 </div>
 
                 {/* Bottom section: Copyright and Socials */}
