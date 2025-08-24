@@ -163,12 +163,26 @@ export default function Home() {
             <p className="text-muted-foreground">Match the crypto terms with their definitions.</p>
           </header>
 
+          <div className="w-full bg-secondary/30 backdrop-blur-sm border border-border rounded-xl p-4 md:p-6 mb-8">
+            <div className="flex justify-between items-center mb-4">
+                <h2 className="text-lg font-headline">Level {level} Progress</h2>
+                <Button variant="outline" size="icon" onClick={resetGame}>
+                  <RefreshCw className="h-4 w-4" />
+                  <span className="sr-only">Reset Game</span>
+                </Button>
+            </div>
+            <div className="flex items-center gap-4">
+                <Progress value={progress} className="w-full" />
+                <div className="text-lg font-headline text-right min-w-[80px]">{matchedPairs} / {totalPairs}</div>
+            </div>
+          </div>
+
           <GameBoard cards={cards} onCardClick={handleCardClick} isDisabled={isChecking} />
 
           <div className="w-full bg-secondary/30 backdrop-blur-sm border border-border rounded-xl p-4 md:p-6 mt-8">
-            <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
               <div className="flex items-center gap-2 flex-wrap">
-                <p className="text-sm font-headline mr-2">Level:</p>
+                <p className="text-sm font-headline mr-2">Switch Level:</p>
                 {gameLevels.map((_, index) => (
                   <Button
                     key={index + 1}
@@ -184,14 +198,6 @@ export default function Home() {
                   </Button>
                 ))}
               </div>
-              <Button variant="outline" size="icon" onClick={resetGame}>
-                  <RefreshCw className="h-4 w-4" />
-                  <span className="sr-only">Reset Game</span>
-              </Button>
-            </div>
-            <div className="flex items-center gap-4">
-                <Progress value={progress} className="w-full" />
-                <div className="text-lg font-headline text-right min-w-[80px]">{matchedPairs} / {totalPairs}</div>
             </div>
           </div>
 
