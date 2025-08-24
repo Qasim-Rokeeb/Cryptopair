@@ -1,3 +1,4 @@
+
 "use client";
 
 import { cn } from '@/lib/utils';
@@ -24,10 +25,10 @@ export function GameCard({ card, isFlipped, isMatched, isMismatched, onClick, is
   };
 
   return (
-    <div className={cn("perspective", isMismatched && "animate-shake")} onClick={handleClick}>
+    <div className={cn("p-1.5", isMismatched && "animate-shake")} onClick={handleClick}>
       <div
         className={cn(
-          'relative w-full h-full min-h-[12rem] rounded-lg preserve-3d transition-transform duration-500 ease-in-out',
+          'relative w-full h-full min-h-[12rem] rounded-lg preserve-3d transition-transform duration-500 ease-in-out perspective',
           (isFlipped || isMatched) && 'rotate-y-180',
           !isMatched && 'cursor-pointer'
         )}
