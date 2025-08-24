@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { Coins, RefreshCw, Github, Twitter, Globe } from 'lucide-react';
+import { Coins, Github, Globe, RefreshCw, Twitter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { GameBoard } from '@/components/game/GameBoard';
 import { MatchDialog } from '@/components/game/MatchDialog';
@@ -12,6 +12,7 @@ import { useGameProgress } from '@/hooks/use-game-progress';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
+import { GameFooter } from '@/components/game/GameFooter';
 
 export type GameCardData = {
   id: string;
@@ -152,80 +153,32 @@ export default function Home() {
 
   return (
     <>
-      <main className="min-h-screen bg-background bg-grid flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
-        <div className="w-full max-w-5xl flex flex-col">
-          <header className="w-full mb-8 text-center">
-            <div className="flex items-center justify-center gap-4 mb-2">
-              <Coins className="w-10 h-10 text-primary text-glow-primary" />
-              <h1 className="text-4xl md:text-5xl font-headline font-bold text-glow-primary">
-                CryptoPair
-              </h1>
-            </div>
-            <p className="text-muted-foreground">Match the crypto terms with their definitions.</p>
-          </header>
-
-          <div className="w-full bg-secondary/30 backdrop-blur-sm border border-border rounded-xl p-4 md:p-6 mb-8">
-            <div className="flex justify-between items-center mb-4">
-                <h2 className="text-lg font-headline">Level {level} Progress</h2>
-                <Button variant="outline" size="icon" onClick={resetGame}>
-                  <RefreshCw className="h-4 w-4" />
-                  <span className="sr-only">Reset Game</span>
-                </Button>
-            </div>
-            <div className="flex items-center gap-4">
-                <Progress value={progress} className="w-full" />
-                <div className="text-lg font-headline text-right min-w-[80px]">{matchedPairs} / {totalPairs}</div>
-            </div>
-          </div>
-
-          <GameBoard cards={cards} onCardClick={handleCardClick} isDisabled={isChecking} />
-
-          <div className="w-full bg-secondary/30 backdrop-blur-sm border border-border rounded-xl p-4 md:p-6 mt-8">
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-              <div className="flex items-center gap-2 flex-wrap">
-                <p className="text-sm font-headline mr-2">Switch Level:</p>
-                {gameLevels.map((_, index) => (
-                  <Button
-                    key={index + 1}
-                    variant={level === index + 1 ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setLevel(index + 1)}
-                    className={cn(
-                      "font-headline",
-                      level === index + 1 && "card-glow-matched"
-                    )}
-                  >
-                    {index + 1}
-                  </Button>
-                ))}
+      <div className="flex flex-col min-h-screen">
+        <main className="flex-grow bg-background bg-grid flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pb-48">
+          <div className="w-full max-w-5xl flex flex-col items-center">
+            <header className="w-full mb-8 text-center">
+              <div className="flex items-center justify-center gap-4 mb-2">
+                <Coins className="w-10 h-10 text-primary text-glow-primary" />
+                <h1 className="text-4xl md:text-5xl font-headline font-bold text-glow-primary">
+                  CryptoPair
+                </h1>
               </div>
-            </div>
+              <p className="text-muted-foreground">Match the crypto terms with their definitions.</p>
+            </header>
+
+            <GameBoard cards={cards} onCardClick={handleCardClick} isDisabled={isChecking} />
           </div>
-
-
-          <footer className="w-full mt-12 border-t border-border/50 pt-6">
-              <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-                <p className="text-muted-foreground text-sm">
-                  © 2024 CryptoPair. All rights reserved.
-                </p>
-                <div className="flex items-center gap-4">
-                  <a href="https://github.com/Qasim-Rokeeb" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                    <Github className="h-5 w-5" />
-                    <span className="sr-only">GitHub</span>
-                  </a>
-                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                    <Twitter className="h-5 w-5" />
-                    <span className="sr-only">Twitter</span>
-                  </a>
-                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                    <Globe className="h-5 w-5" />
-                    <span className="sr-only">Website</span>
-                  </a>
-                </div>
-              </div>
-          </footer>
-        </div>
-      </main>
+        </main>
+        
+        <GameFooter 
+          level={level}
+          setLevel={setLevel}
+          resetGame={resetGame}
+          progress={progress}
+          matchedPairs={matchedPairs}
+          totalPairs={totalPairs}
+        />
+      </div>
 
       <MatchDialog
         open={dialogState === 'match'}
