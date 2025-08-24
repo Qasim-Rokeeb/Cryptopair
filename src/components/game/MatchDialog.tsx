@@ -2,13 +2,13 @@
 
 import { useState } from 'react';
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from '@/components/ui/dialog';
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
+} from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Gem, LoaderCircle } from 'lucide-react';
 import { generateExplanation } from '@/ai/flows/generate-explanation';
@@ -51,17 +51,17 @@ export function MatchDialog({ open, onOpenChange, term }: MatchDialogProps) {
   }
 
   return (
-    <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[425px] bg-card border-green-500 card-glow-matched">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 font-headline text-2xl text-green-400">
+    <Sheet open={open} onOpenChange={handleClose}>
+      <SheetContent side="bottom" className="sm:max-w-none md:max-w-xl mx-auto bg-card border-green-500 card-glow-matched rounded-t-lg">
+        <SheetHeader>
+          <SheetTitle className="flex items-center gap-2 font-headline text-2xl text-green-400">
             <Gem className="w-6 h-6" />
             It's a Match!
-          </DialogTitle>
-          <DialogDescription>
+          </SheetTitle>
+          <SheetDescription>
             You successfully matched the term: <span className="font-bold text-primary">{term}</span>
-          </DialogDescription>
-        </DialogHeader>
+          </SheetDescription>
+        </SheetHeader>
         
         {isLoading && (
             <div className="flex items-center justify-center p-8">
@@ -77,7 +77,7 @@ export function MatchDialog({ open, onOpenChange, term }: MatchDialogProps) {
             </ScrollArea>
         )}
 
-        <DialogFooter className="gap-2 sm:justify-start">
+        <SheetFooter className="gap-2 sm:justify-start">
             {!explanation && !isLoading && (
                 <Button onClick={handleLearnMore}>
                     <Gem className="mr-2 h-4 w-4" />
@@ -87,8 +87,8 @@ export function MatchDialog({ open, onOpenChange, term }: MatchDialogProps) {
           <Button type="button" variant="secondary" onClick={handleClose}>
             Continue
           </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   );
 }
