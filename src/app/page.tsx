@@ -152,13 +152,15 @@ export default function Home() {
     <>
       <div className="flex flex-col min-h-screen">
         <header className="w-full pt-8 sm:pt-12 text-center bg-background bg-grid">
-          <div className="flex items-center justify-center gap-4 mb-2">
-            <Coins className="w-10 h-10 text-primary text-glow-primary" />
-            <h1 className="text-4xl md:text-5xl font-headline font-bold text-glow-primary">
-              CryptoPair
-            </h1>
+          <div className="max-w-5xl mx-auto px-4">
+            <div className="flex items-center justify-center gap-4 mb-2">
+              <Coins className="w-10 h-10 text-primary text-glow-primary" />
+              <h1 className="text-4xl md:text-5xl font-headline font-bold text-glow-primary">
+                CryptoPair
+              </h1>
+            </div>
+            <p className="text-muted-foreground">Match the crypto terms with their definitions.</p>
           </div>
-          <p className="text-muted-foreground">Match the crypto terms with their definitions.</p>
         </header>
 
         <main className="flex-grow bg-background bg-grid flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pb-48">
