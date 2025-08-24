@@ -9,6 +9,7 @@ import { LevelCompleteDialog } from '@/components/game/LevelCompleteDialog';
 import { getLevelData, gameLevels } from '@/lib/game-data';
 import { useGameProgress } from '@/hooks/use-game-progress';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Progress } from '@/components/ui/progress';
 
 export type GameCardData = {
   id: string;
@@ -44,8 +45,6 @@ export default function Home() {
   const initializeGame = useCallback((currentLevel: number) => {
     const levelData = getLevelData(currentLevel);
     if (!levelData) {
-      // Handle case where level data doesn't exist (e.g., max level reached)
-      // Maybe reset to level 1 or show a completion message.
       setLevel(1);
       return;
     }
@@ -132,6 +131,8 @@ export default function Home() {
     initializeGame(level);
   }
 
+  const progress = totalPairs > 0 ? (matchedPairs / totalPairs) * 100 : 0;
+
   if (!isLoaded) {
     return (
         <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
@@ -149,31 +150,38 @@ export default function Home() {
 
   return (
     <>
-      <main className="min-h-screen bg-background flex flex-col items-center p-4 sm:p-8">
-        <header className="w-full max-w-5xl mb-8 text-center">
-          <div className="flex items-center justify-center gap-4 mb-2">
-            <BrainCircuit className="w-10 h-10 text-primary text-glow-primary" />
-            <h1 className="text-4xl md:text-5xl font-headline font-bold text-glow-primary">
-              CryptoPair
-            </h1>
+      <main className="min-h-screen bg-background bg-grid flex flex-col items-center p-4 sm:p-8">
+        <div className="w-full max-w-5xl flex flex-col">
+          <header className="w-full mb-8 text-center">
+            <div className="flex items-center justify-center gap-4 mb-2">
+              <BrainCircuit className="w-10 h-10 text-primary text-glow-primary" />
+              <h1 className="text-4xl md:text-5xl font-headline font-bold text-glow-primary">
+                CryptoPair
+              </h1>
+            </div>
+            <p className="text-muted-foreground">Match the crypto terms with their definitions.</p>
+          </header>
+
+          <div className="w-full bg-secondary/30 backdrop-blur-sm border border-border rounded-xl p-4 md:p-6 mb-6">
+            <div className="flex justify-between items-center mb-4">
+              <div className="text-lg font-headline">Level: <span className="text-primary font-bold text-xl">{level}</span></div>
+              <Button variant="outline" size="icon" onClick={resetGame}>
+                  <RefreshCw className="h-4 w-4" />
+                  <span className="sr-only">Reset Game</span>
+              </Button>
+            </div>
+            <div className="flex items-center gap-4">
+                <Progress value={progress} className="w-full" />
+                <div className="text-lg font-headline text-right min-w-[80px]">{matchedPairs} / {totalPairs}</div>
+            </div>
           </div>
-          <p className="text-muted-foreground">Match the crypto terms with their definitions.</p>
-        </header>
 
-        <div className="w-full max-w-5xl flex justify-between items-center mb-4">
-            <div className="text-xl font-headline">Level: <span className="text-primary font-bold">{level}</span></div>
-            <div className="text-xl font-headline">Matched: <span className="text-primary font-bold">{matchedPairs}</span> / {totalPairs}</div>
-            <Button variant="outline" size="icon" onClick={resetGame}>
-                <RefreshCw className="h-4 w-4" />
-                <span className="sr-only">Reset Game</span>
-            </Button>
+          <GameBoard cards={cards} onCardClick={handleCardClick} isDisabled={isChecking} />
+
+          <footer className="mt-8 text-muted-foreground text-sm text-center">
+              Created for learning and fun.
+          </footer>
         </div>
-
-        <GameBoard cards={cards} onCardClick={handleCardClick} isDisabled={isChecking} />
-
-        <footer className="mt-8 text-muted-foreground text-sm">
-            Created for learning and fun.
-        </footer>
       </main>
 
       <MatchDialog

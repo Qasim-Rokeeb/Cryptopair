@@ -32,15 +32,15 @@ export function GameCard({ card, isFlipped, isMatched, onClick, isDisabled }: Ga
         )}
       >
         {/* Front of card */}
-        <div className="absolute w-full h-full backface-hidden rounded-lg bg-card border-2 border-accent/50 flex items-center justify-center p-4 hover:border-accent transition-colors">
-          <BrainCircuit className="w-16 h-16 text-accent/70" />
+        <div className="absolute w-full h-full backface-hidden rounded-lg bg-secondary/50 border-2 border-primary/20 flex items-center justify-center p-4 hover:border-primary transition-colors">
+          <BrainCircuit className="w-16 h-16 text-primary/50" />
         </div>
         {/* Back of card */}
         <div
           className={cn(
-            'absolute w-full h-full backface-hidden rotate-y-180 rounded-lg flex items-center justify-center p-4 text-center text-card-foreground',
-            isMatched ? 'bg-primary/20 border-2 border-primary card-glow-matched' : 'bg-card border-2 border-border',
-            card.type === 'term' ? 'font-headline font-bold text-lg' : 'text-sm'
+            'absolute w-full h-full backface-hidden rotate-y-180 rounded-lg flex items-center justify-center p-4 text-center',
+            isMatched ? 'bg-primary/10 border-2 border-primary card-glow-matched' : 'bg-secondary border-2 border-border',
+            card.type === 'term' ? 'font-headline font-bold text-lg text-primary-foreground' : 'text-sm text-muted-foreground'
           )}
         >
           {card.content}
