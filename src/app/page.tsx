@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { BrainCircuit, RefreshCw } from 'lucide-react';
+import { Bitcoin, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { GameBoard } from '@/components/game/GameBoard';
 import { MatchDialog } from '@/components/game/MatchDialog';
@@ -154,7 +154,7 @@ export default function Home() {
         <div className="w-full max-w-5xl flex flex-col">
           <header className="w-full mb-8 text-center">
             <div className="flex items-center justify-center gap-4 mb-2">
-              <BrainCircuit className="w-10 h-10 text-primary text-glow-primary" />
+              <Bitcoin className="w-10 h-10 text-primary text-glow-primary" />
               <h1 className="text-4xl md:text-5xl font-headline font-bold text-glow-primary">
                 CryptoPair
               </h1>

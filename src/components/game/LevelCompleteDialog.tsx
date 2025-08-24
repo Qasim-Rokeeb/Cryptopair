@@ -9,7 +9,7 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Award } from 'lucide-react';
+import { Trophy } from 'lucide-react';
 
 type LevelCompleteDialogProps = {
   open: boolean;
@@ -25,7 +25,7 @@ export function LevelCompleteDialog({ open, onOpenChange, level, onNextLevel, is
       <DialogContent className="sm:max-w-[425px] bg-card border-accent">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 font-headline text-2xl text-accent">
-            <Award className="w-6 h-6" />
+            <Trophy className="w-6 h-6" />
             Level {level} Complete!
           </DialogTitle>
           <DialogDescription>

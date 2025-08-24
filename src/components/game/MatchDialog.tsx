@@ -10,7 +10,7 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Sparkles, LoaderCircle } from 'lucide-react';
+import { Gem, LoaderCircle } from 'lucide-react';
 import { generateExplanation } from '@/ai/flows/generate-explanation';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
@@ -55,7 +55,7 @@ export function MatchDialog({ open, onOpenChange, term }: MatchDialogProps) {
       <DialogContent className="sm:max-w-[425px] bg-card border-primary card-glow-matched">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 font-headline text-2xl text-primary text-glow-primary">
-            <Sparkles className="w-6 h-6" />
+            <Gem className="w-6 h-6" />
             It's a Match!
           </DialogTitle>
           <DialogDescription>
@@ -80,7 +80,7 @@ export function MatchDialog({ open, onOpenChange, term }: MatchDialogProps) {
         <DialogFooter className="gap-2 sm:justify-start">
             {!explanation && !isLoading && (
                 <Button onClick={handleLearnMore}>
-                    <Sparkles className="mr-2 h-4 w-4" />
+                    <Gem className="mr-2 h-4 w-4" />
                     Learn More
                 </Button>
             )}
