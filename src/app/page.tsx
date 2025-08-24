@@ -2,16 +2,13 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { Coins, Github, Globe, RefreshCw, Twitter } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Coins } from 'lucide-react';
 import { GameBoard } from '@/components/game/GameBoard';
 import { MatchDialog } from '@/components/game/MatchDialog';
 import { LevelCompleteDialog } from '@/components/game/LevelCompleteDialog';
 import { getLevelData, gameLevels } from '@/lib/game-data';
 import { useGameProgress } from '@/hooks/use-game-progress';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Progress } from '@/components/ui/progress';
-import { cn } from '@/lib/utils';
 import { GameFooter } from '@/components/game/GameFooter';
 
 export type GameCardData = {
@@ -154,18 +151,18 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-col min-h-screen">
+        <header className="w-full pt-8 sm:pt-12 text-center bg-background bg-grid">
+          <div className="flex items-center justify-center gap-4 mb-2">
+            <Coins className="w-10 h-10 text-primary text-glow-primary" />
+            <h1 className="text-4xl md:text-5xl font-headline font-bold text-glow-primary">
+              CryptoPair
+            </h1>
+          </div>
+          <p className="text-muted-foreground">Match the crypto terms with their definitions.</p>
+        </header>
+
         <main className="flex-grow bg-background bg-grid flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pb-48">
           <div className="w-full max-w-5xl flex flex-col items-center">
-            <header className="w-full mb-8 text-center">
-              <div className="flex items-center justify-center gap-4 mb-2">
-                <Coins className="w-10 h-10 text-primary text-glow-primary" />
-                <h1 className="text-4xl md:text-5xl font-headline font-bold text-glow-primary">
-                  CryptoPair
-                </h1>
-              </div>
-              <p className="text-muted-foreground">Match the crypto terms with their definitions.</p>
-            </header>
-
             <GameBoard cards={cards} onCardClick={handleCardClick} isDisabled={isChecking} />
           </div>
         </main>
