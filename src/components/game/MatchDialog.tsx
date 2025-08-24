@@ -62,9 +62,9 @@ export function MatchDialog({ open, onOpenChange, term }: MatchDialogProps) {
 
   return (
     <Sheet open={open} onOpenChange={handleOpenChange}>
-      <SheetContent side="bottom" className="sm:max-w-none md:max-w-xl mx-auto bg-card border-green-500 card-glow-matched rounded-t-lg">
+      <SheetContent side="bottom" className="sm:max-w-none md:max-w-xl mx-auto bg-card border-success card-glow-matched rounded-t-lg">
         <SheetHeader>
-          <SheetTitle className="flex items-center gap-2 font-headline text-2xl text-green-400">
+          <SheetTitle className="flex items-center gap-2 font-headline text-2xl text-success">
             <Gem className="w-6 h-6" />
             It's a Match!
           </SheetTitle>

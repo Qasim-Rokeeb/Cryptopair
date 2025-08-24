@@ -41,9 +41,9 @@ export function GameCard({ card, isFlipped, isMatched, isMismatched, onClick, is
         <div
           className={cn(
             'absolute w-full h-full backface-hidden rotate-y-180 rounded-lg flex items-center justify-center p-4 text-center',
-            isMatched ? 'bg-green-500/10 border-2 border-green-500 card-glow-matched' : 'bg-secondary border-2 border-border',
+            isMatched ? 'bg-success/10 border-2 border-success card-glow-matched' : 'bg-secondary border-2 border-border',
             isMismatched && '!border-destructive',
-            card.type === 'term' ? 'font-headline font-bold text-lg text-primary-foreground' : 'text-sm text-muted-foreground'
+            card.type === 'term' ? 'font-headline font-bold text-lg text-foreground' : 'text-sm text-muted-foreground'
           )}
         >
           {card.content}

@@ -22,9 +22,9 @@ type LevelCompleteDialogProps = {
 export function LevelCompleteDialog({ open, onOpenChange, level, onNextLevel, isLastLevel }: LevelCompleteDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] bg-card border-accent">
+      <DialogContent className="sm:max-w-[425px] bg-card border-success">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 font-headline text-2xl text-accent">
+          <DialogTitle className="flex items-center gap-2 font-headline text-2xl text-success">
             <Trophy className="w-6 h-6" />
             Level {level} Complete!
           </DialogTitle>
