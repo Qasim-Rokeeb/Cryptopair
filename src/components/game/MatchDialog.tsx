@@ -14,6 +14,8 @@ import { Button } from '@/components/ui/button';
 import { Gem, LoaderCircle } from 'lucide-react';
 import { generateExplanation } from '@/ai/flows/generate-explanation';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { useToast } from '@/hooks/use-toast';
+import { ToastAction } from '@/components/ui/toast';
 
 type MatchDialogProps = {
   open: boolean;
@@ -25,6 +27,7 @@ export function MatchDialog({ open, onOpenChange, term }: MatchDialogProps) {
   const [explanation, setExplanation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const { toast } = useToast();
 
   const handleLearnMore = async () => {
     setIsLoading(true);
@@ -36,6 +39,12 @@ export function MatchDialog({ open, onOpenChange, term }: MatchDialogProps) {
     } catch (err) {
       console.error(err);
       setError('Could not generate explanation. Please try again.');
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Could not generate explanation.",
+        action: <ToastAction altText="Retry" onClick={handleLearnMore}>Retry</ToastAction>,
+      })
     } finally {
       setIsLoading(false);
     }
@@ -78,8 +87,6 @@ export function MatchDialog({ open, onOpenChange, term }: MatchDialogProps) {
                 <LoaderCircle className="w-8 h-8 animate-spin text-primary" />
             </div>
         )}
-
-        {error && <p className="text-destructive text-sm">{error}</p>}
         
         {explanation && (
             <ScrollArea className="max-h-[30vh] my-4 p-4 border rounded-md bg-background/50">
