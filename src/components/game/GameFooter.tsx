@@ -100,7 +100,7 @@ export function GameFooter({ level, setLevel, resetGame, progress, matchedPairs,
                             </SheetTrigger>
                             <SheetContent side="bottom" className="rounded-t-lg">
                                 <SheetHeader>
-                                    <SheetTitle className="font-headline text-center">Select Level</SheetTitle>
+                                    <SheetTitle className="font-headline text-center text-xl">Select Level</SheetTitle>
                                 </SheetHeader>
                                 <LevelSelectorContent />
                             </SheetContent>

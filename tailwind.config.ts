@@ -9,6 +9,18 @@ export default {
   ],
   theme: {
     extend: {
+      fontSize: {
+        'xs': ['clamp(0.8rem, 0.17vw + 0.76rem, 0.89rem)', { lineHeight: '1.4' }],
+        'sm': ['clamp(0.9rem, 0.22vw + 0.84rem, 1.05rem)', { lineHeight: '1.5' }],
+        'base': ['clamp(1rem, 0.34vw + 0.91rem, 1.25rem)', { lineHeight: '1.6' }],
+        'lg': ['clamp(1.13rem, 0.52vw + 1rem, 1.5rem)', { lineHeight: '1.4' }],
+        'xl': ['clamp(1.27rem, 0.78vw + 1.07rem, 1.8rem)', { lineHeight: '1.4' }],
+        '2xl': ['clamp(1.42rem, 1.15vw + 1.14rem, 2.16rem)', { lineHeight: '1.3' }],
+        '3xl': ['clamp(1.6rem, 1.68vw + 1.21rem, 2.59rem)', { lineHeight: '1.2' }],
+        '4xl': ['clamp(1.8rem, 2.41vw + 1.25rem, 3.11rem)', { lineHeight: '1.1' }],
+        '5xl': ['clamp(2.03rem, 3.4vw + 1.27rem, 3.73rem)', { lineHeight: '1' }],
+        '6xl': ['clamp(2.28rem, 4.74vw + 1.2rem, 4.48rem)', { lineHeight: '1' }],
+      },
       fontFamily: {
         body: ['Inter', 'sans-serif'],
         headline: ['Space Grotesk', 'sans-serif'],

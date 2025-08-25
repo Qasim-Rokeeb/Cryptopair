@@ -173,11 +173,11 @@ export default function Home() {
             <div className="text-center">
                 <div className="flex items-center justify-center gap-4 mb-2">
                     <Coins className="w-10 h-10 text-primary text-glow-primary" />
-                    <h1 className="text-4xl md:text-5xl font-headline font-bold text-glow-primary">
+                    <h1 className="text-4xl font-headline font-bold text-glow-primary">
                         CryptoPair
                     </h1>
                 </div>
-                <p className="text-muted-foreground">Match the crypto terms with their definitions.</p>
+                <p className="text-base text-muted-foreground">Match the crypto terms with their definitions.</p>
             </div>
             <div className="absolute top-0 right-4">
                 <ThemeToggle />
