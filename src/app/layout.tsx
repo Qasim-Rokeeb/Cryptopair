@@ -22,6 +22,13 @@ export const metadata: Metadata = {
   description: 'A "Crypto Match" game for learning cryptocurrency and Web3 terminology.',
   manifest: '/manifest.json',
   themeColor: '#1a1a1a',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+    interactiveWidget: 'resizes-content',
+  },
 };
 
 export default function RootLayout({
