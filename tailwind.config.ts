@@ -22,8 +22,8 @@ export default {
         '6xl': ['clamp(2.28rem, 4.74vw + 1.2rem, 4.48rem)', { lineHeight: '1' }],
       },
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        headline: ['Space Grotesk', 'sans-serif'],
+        body: ['var(--font-body)', 'sans-serif'],
+        headline: ['var(--font-headline)', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
