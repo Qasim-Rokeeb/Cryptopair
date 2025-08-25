@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
@@ -24,6 +24,19 @@ type GameFooterProps = {
 export function GameFooter({ level, setLevel, resetGame, progress, matchedPairs, totalPairs, highestUnlockedLevel }: GameFooterProps) {
     const isMobile = useIsMobile();
     const [isSheetOpen, setSheetOpen] = useState(false);
+    const [newlyUnlockedLevel, setNewlyUnlockedLevel] = useState<number | null>(null);
+    const prevHighestUnlockedLevel = useRef(highestUnlockedLevel);
+
+    useEffect(() => {
+        if (highestUnlockedLevel > prevHighestUnlockedLevel.current) {
+            setNewlyUnlockedLevel(highestUnlockedLevel);
+            const timer = setTimeout(() => {
+                setNewlyUnlockedLevel(null);
+            }, 1500); // Animation duration
+            prevHighestUnlockedLevel.current = highestUnlockedLevel;
+            return () => clearTimeout(timer);
+        }
+    }, [highestUnlockedLevel]);
 
     const handleLevelSelect = (newLevel: number) => {
         if (newLevel > highestUnlockedLevel) return;
@@ -48,7 +61,8 @@ export function GameFooter({ level, setLevel, resetGame, progress, matchedPairs,
                 className={cn(
                   "font-headline h-12 w-12 text-lg relative",
                    level === levelNum && "card-glow-matched",
-                   isLocked && "grayscale blur-sm pointer-events-none"
+                   isLocked && "grayscale blur-[2px] pointer-events-none",
+                   newlyUnlockedLevel === levelNum && "animate-sparkle"
                 )}
               >
                 {isLocked && <Lock className="absolute w-5 h-5 z-10" />}
@@ -112,7 +126,8 @@ export function GameFooter({ level, setLevel, resetGame, progress, matchedPairs,
                                                     className={cn(
                                                         "font-headline h-9 w-9 p-0 relative",
                                                         level === levelNum && "card-glow-matched",
-                                                        isLocked && "grayscale blur-sm pointer-events-none"
+                                                        isLocked && "grayscale blur-[2px] pointer-events-none",
+                                                        newlyUnlockedLevel === levelNum && "animate-sparkle"
                                                     )}
                                                 >
                                                     {isLocked && <Lock className="absolute w-4 h-4 z-10" />}
