@@ -1,0 +1,21 @@
+{
+  "name": "CryptoPair",
+  "short_name": "CryptoPair",
+  "description": "A 'Crypto Match' game for learning cryptocurrency and Web3 terminology.",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#1a1a1a",
+  "background_color": "#1a1a1a",
+  "start_url": "/",
+  "display": "standalone"
+}

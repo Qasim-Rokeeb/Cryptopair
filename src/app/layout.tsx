@@ -20,6 +20,8 @@ const fontSpaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: 'CryptoPair',
   description: 'A "Crypto Match" game for learning cryptocurrency and Web3 terminology.',
+  manifest: '/manifest.json',
+  themeColor: '#1a1a1a',
 };
 
 export default function RootLayout({
