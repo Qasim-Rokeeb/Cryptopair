@@ -1,6 +1,7 @@
 
 "use client";
 import { Coins } from 'lucide-react';
+import React from 'react';
 
 const BitcoinIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -100,7 +101,9 @@ const defaultIcons: { [key: string]: React.ComponentType<React.SVGProps<SVGSVGEl
     dustingAttack: (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>,
 };
 
-export const CryptoIcon = ({ iconName, ...props }: { iconName: string } & React.SVGProps<SVGSVGElement>) => {
+const CryptoIcon = ({ iconName, ...props }: { iconName: string } & React.SVGProps<SVGSVGElement>) => {
   const IconComponent = icons[iconName] || defaultIcons[iconName] || icons.default;
   return <IconComponent {...props} />;
 };
+
+export default CryptoIcon;

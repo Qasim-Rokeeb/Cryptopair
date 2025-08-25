@@ -2,7 +2,7 @@
 "use client";
 
 import { cn } from '@/lib/utils';
-import { CryptoIcon } from './CryptoIcon';
+import { Icon } from './Icon';
 
 type GameCardProps = {
   card: {
@@ -37,7 +37,7 @@ export function GameCard({ card, isFlipped, isMatched, isMismatched, onClick, is
       >
         {/* Front of card */}
         <div className="absolute w-full h-full backface-hidden rounded-lg bg-secondary/50 dark:bg-white/5 dark:backdrop-blur-lg border-2 border-primary/20 flex items-center justify-center p-4 hover:border-primary transition-colors">
-          <CryptoIcon iconName={card.icon} className="w-16 h-16 text-primary/50" />
+          <Icon name={card.icon} className="w-16 h-16 text-primary/50" />
         </div>
         {/* Back of card */}
         <div
