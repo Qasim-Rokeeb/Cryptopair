@@ -13,6 +13,7 @@ import { GameFooter } from '@/components/game/GameFooter';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { cn } from '@/lib/utils';
 import { Confetti } from '@/components/game/Confetti';
+import { EmptyState } from '@/components/game/EmptyState';
 
 export type GameCardData = {
   id: string;
@@ -41,6 +42,7 @@ export default function Home() {
   const [isChecking, setIsChecking] = useState(false);
   const [matchedPairs, setMatchedPairs] = useState(0);
   const [mismatchedCards, setMismatchedCards] = useState<string[]>([]);
+  const [hasGameData, setHasGameData] = useState(true);
 
   const [dialogState, setDialogState] = useState<'none' | 'match' | 'level-complete'>('none');
   const [lastMatchedTerm, setLastMatchedTerm] = useState('');
@@ -51,9 +53,14 @@ export default function Home() {
   const initializeGame = useCallback((currentLevel: number) => {
     const levelData = getLevelData(currentLevel);
     if (!levelData) {
-      setLevel(1);
+      if(currentLevel > 1) {
+        setLevel(1);
+      } else {
+        setHasGameData(false);
+      }
       return;
     }
+    setHasGameData(true);
 
     const gameCards = levelData.flatMap((pair, index) => [
       { id: `term-${index}`, type: 'term' as const, content: pair.term, matchId: index, isFlipped: false, isMatched: false, icon: pair.icon },
@@ -163,44 +170,60 @@ export default function Home() {
         </div>
     )
   }
+  
+  const PageHeader = () => (
+    <header className="w-full pt-8 sm:pt-12">
+        <div className="max-w-5xl mx-auto px-4 flex justify-center items-center relative">
+        <div className="text-center">
+            <div className="flex items-center justify-center gap-4 mb-2">
+                <Coins className="w-10 h-10 text-primary text-glow-primary" />
+                <h1 className="text-4xl font-headline font-bold text-glow-primary">
+                    CryptoPair
+                </h1>
+            </div>
+            <p className="text-base text-muted-foreground">Match the crypto terms with their definitions.</p>
+        </div>
+        <div className="absolute top-0 right-4">
+            <ThemeToggle />
+        </div>
+        </div>
+    </header>
+  );
 
   return (
     <div className={cn("min-h-screen w-full bg-background bg-grid bg-gradient-radial-background", (dialogState !== 'none') && 'h-screen overflow-hidden')}>
       <Confetti active={showConfetti} onComplete={() => setShowConfetti(false)} />
       <div className="min-h-screen">
-        <header className="w-full pt-8 sm:pt-12">
-          <div className="max-w-5xl mx-auto px-4 flex justify-center items-center relative">
-            <div className="text-center">
-                <div className="flex items-center justify-center gap-4 mb-2">
-                    <Coins className="w-10 h-10 text-primary text-glow-primary" />
-                    <h1 className="text-4xl font-headline font-bold text-glow-primary">
-                        CryptoPair
-                    </h1>
-                </div>
-                <p className="text-base text-muted-foreground">Match the crypto terms with their definitions.</p>
-            </div>
-            <div className="absolute top-0 right-4">
-                <ThemeToggle />
-            </div>
-          </div>
-        </header>
+        <PageHeader />
 
         <main className="flex-grow flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pb-48">
           <div className="w-full max-w-5xl flex flex-col items-center">
-            <GameBoard cards={cards} onCardClick={handleCardClick} isDisabled={isChecking} mismatchedCards={mismatchedCards} />
+            {!hasGameData ? (
+                <EmptyState />
+            ) : cards.length > 0 ? (
+                <GameBoard cards={cards} onCardClick={handleCardClick} isDisabled={isChecking} mismatchedCards={mismatchedCards} />
+            ) : (
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+                    {Array.from({ length: 8 }).map((_, i) => (
+                        <Skeleton key={i} className="h-48 w-full" />
+                    ))}
+                </div>
+            )}
           </div>
         </main>
       </div>
 
-      <GameFooter 
-        level={level}
-        setLevel={setLevel}
-        resetGame={resetGame}
-        progress={progress}
-        matchedPairs={matchedPairs}
-        totalPairs={totalPairs}
-        highestUnlockedLevel={highestUnlockedLevel}
-      />
+      {hasGameData && (
+        <GameFooter 
+          level={level}
+          setLevel={setLevel}
+          resetGame={resetGame}
+          progress={progress}
+          matchedPairs={matchedPairs}
+          totalPairs={totalPairs}
+          highestUnlockedLevel={highestUnlockedLevel}
+        />
+      )}
 
       <MatchDialog
         open={dialogState === 'match'}
