@@ -21,6 +21,7 @@ export type GameCardData = {
   matchId: number;
   isFlipped: boolean;
   isMatched: boolean;
+  icon: string;
 };
 
 // Fisher-Yates shuffle algorithm
@@ -55,8 +56,8 @@ export default function Home() {
     }
 
     const gameCards = levelData.flatMap((pair, index) => [
-      { id: `term-${index}`, type: 'term' as const, content: pair.term, matchId: index, isFlipped: false, isMatched: false },
-      { id: `def-${index}`, type: 'definition' as const, content: pair.definition, matchId: index, isFlipped: false, isMatched: false },
+      { id: `term-${index}`, type: 'term' as const, content: pair.term, matchId: index, isFlipped: false, isMatched: false, icon: pair.icon },
+      { id: `def-${index}`, type: 'definition' as const, content: pair.definition, matchId: index, isFlipped: false, isMatched: false, icon: pair.icon },
     ]);
 
     setCards(shuffleArray(gameCards));

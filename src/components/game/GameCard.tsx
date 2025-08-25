@@ -2,13 +2,14 @@
 "use client";
 
 import { cn } from '@/lib/utils';
-import { Coins } from 'lucide-react';
+import { CryptoIcon } from './CryptoIcon';
 
 type GameCardProps = {
   card: {
     id: string;
     content: string;
     type: 'term' | 'definition';
+    icon: string;
   };
   isFlipped: boolean;
   isMatched: boolean;
@@ -36,7 +37,7 @@ export function GameCard({ card, isFlipped, isMatched, isMismatched, onClick, is
       >
         {/* Front of card */}
         <div className="absolute w-full h-full backface-hidden rounded-lg bg-secondary/50 dark:bg-white/5 dark:backdrop-blur-lg border-2 border-primary/20 flex items-center justify-center p-4 hover:border-primary transition-colors">
-          <Coins className="w-16 h-16 text-primary/50" />
+          <CryptoIcon iconName={card.icon} className="w-16 h-16 text-primary/50" />
         </div>
         {/* Back of card */}
         <div
