@@ -26,8 +26,22 @@ export function GameCard({ card, isFlipped, isMatched, isMismatched, onClick, is
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleClick();
+    }
+  };
+
   return (
-    <div className={cn("p-1.5 animate-card-enter", isMismatched && "animate-shake")} onClick={handleClick} style={{ animationDelay: `${index * 40}ms` }}>
+    <div 
+      className={cn("p-1.5 animate-card-enter rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background", isMismatched && "animate-shake")} 
+      onClick={handleClick} 
+      onKeyDown={handleKeyDown}
+      tabIndex={isMatched || isDisabled ? -1 : 0}
+      role="button"
+      aria-label={`Card ${index + 1}. ${isFlipped ? card.content : 'Face down'}`}
+      style={{ animationDelay: `${index * 40}ms` }}>
       <div
         className={cn(
           'relative w-full h-full min-h-[12rem] rounded-lg preserve-3d transition-transform duration-500 ease-in-out perspective',
