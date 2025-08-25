@@ -12,6 +12,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { GameFooter } from '@/components/game/GameFooter';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { cn } from '@/lib/utils';
+import { Confetti } from '@/components/game/Confetti';
 
 export type GameCardData = {
   id: string;
@@ -42,6 +43,7 @@ export default function Home() {
 
   const [dialogState, setDialogState] = useState<'none' | 'match' | 'level-complete'>('none');
   const [lastMatchedTerm, setLastMatchedTerm] = useState('');
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const totalPairs = useMemo(() => getLevelData(level)?.length ?? 0, [level]);
 
@@ -63,6 +65,7 @@ export default function Home() {
     setIsChecking(false);
     setDialogState('none');
     setMismatchedCards([]);
+    setShowConfetti(false);
   }, [setLevel]);
 
   useEffect(() => {
@@ -90,6 +93,7 @@ export default function Home() {
 
       if (first.matchId === second.matchId) {
         // It's a match
+        setShowConfetti(true);
         setTimeout(() => {
           setCards(prevCards =>
             prevCards.map(c => (c.matchId === first.matchId ? { ...c, isMatched: true } : c))
@@ -161,6 +165,7 @@ export default function Home() {
 
   return (
     <div className={cn("min-h-screen w-full bg-background bg-grid bg-gradient-radial-background", (dialogState !== 'none') && 'h-screen overflow-hidden')}>
+      <Confetti active={showConfetti} onComplete={() => setShowConfetti(false)} />
       <div className="min-h-screen">
         <header className="w-full pt-8 sm:pt-12">
           <div className="max-w-5xl mx-auto px-4 flex justify-center items-center relative">
