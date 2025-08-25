@@ -47,6 +47,7 @@ export default function Home() {
   const [dialogState, setDialogState] = useState<'none' | 'match' | 'level-complete'>('none');
   const [lastMatchedTerm, setLastMatchedTerm] = useState('');
   const [showConfetti, setShowConfetti] = useState(false);
+  const [announcement, setAnnouncement] = useState('');
 
   const totalPairs = useMemo(() => getLevelData(level)?.length ?? 0, [level]);
 
@@ -74,6 +75,7 @@ export default function Home() {
     setDialogState('none');
     setMismatchedCards([]);
     setShowConfetti(false);
+    setAnnouncement('');
   }, [setLevel]);
 
   useEffect(() => {
@@ -101,19 +103,22 @@ export default function Home() {
 
       if (first.matchId === second.matchId) {
         // It's a match
+        const matchedTerm = first.type === 'term' ? first.content : second.content;
+        setLastMatchedTerm(matchedTerm);
+        setAnnouncement(`You found a match for: ${matchedTerm}.`);
         setShowConfetti(true);
         setTimeout(() => {
           setCards(prevCards =>
             prevCards.map(c => (c.matchId === first.matchId ? { ...c, isMatched: true } : c))
           );
           setMatchedPairs(prev => prev + 1);
-          setLastMatchedTerm(first.type === 'term' ? first.content : second.content);
           setDialogState('match');
           setSelectedCards([]);
           setIsChecking(false);
         }, 500);
       } else {
         // Not a match
+        setAnnouncement('Not a match. Try again.');
         setMismatchedCards([first.id, second.id]);
         setTimeout(() => {
           setCards(prevCards =>
@@ -124,6 +129,7 @@ export default function Home() {
           setSelectedCards([]);
           setIsChecking(false);
           setMismatchedCards([]);
+          setAnnouncement('');
         }, 1200);
       }
     }
@@ -137,6 +143,7 @@ export default function Home() {
               unlockLevel(nextLevel);
             }
             setDialogState('level-complete');
+            setAnnouncement(`Congratulations! You completed level ${level}.`);
         }, 800)
     }
   }, [matchedPairs, totalPairs, level, unlockLevel]);
@@ -193,6 +200,13 @@ export default function Home() {
   return (
     <div className={cn("min-h-screen w-full bg-background bg-grid bg-gradient-radial-background", (dialogState !== 'none') && 'h-screen overflow-hidden')}>
       <Confetti active={showConfetti} onComplete={() => setShowConfetti(false)} />
+      <div
+        aria-live="polite"
+        className="sr-only"
+      >
+        {announcement}
+      </div>
+
       <div className="min-h-screen">
         <PageHeader />
 
