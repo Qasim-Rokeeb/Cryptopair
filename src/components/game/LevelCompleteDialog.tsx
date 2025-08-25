@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -10,6 +11,7 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Trophy } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 type LevelCompleteDialogProps = {
   open: boolean;
@@ -22,7 +24,7 @@ type LevelCompleteDialogProps = {
 export function LevelCompleteDialog({ open, onOpenChange, level, onNextLevel, isLastLevel }: LevelCompleteDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] bg-card border-success">
+      <DialogContent className={cn("sm:max-w-[425px] bg-card border-success data-[state=open]:animate-in data-[state=open]:zoom-in-90 data-[state=open]:bounce-in", "transition-all duration-300")}>
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 font-headline text-2xl text-success">
             <Trophy className="w-6 h-6" />
