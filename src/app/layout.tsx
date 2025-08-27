@@ -43,9 +43,10 @@ export default function RootLayout({
       <body className={cn("font-body antialiased", fontInter.variable, fontSpaceGrotesk.variable)}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="system"
           enableSystem
           disableTransitionOnChange
+          themes={['light', 'dark', 'high-contrast']}
         >
           {children}
           <Toaster />
