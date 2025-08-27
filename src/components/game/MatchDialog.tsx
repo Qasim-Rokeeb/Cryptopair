@@ -16,6 +16,7 @@ import { generateExplanation } from '@/ai/flows/generate-explanation';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/hooks/use-toast';
 import { ToastAction } from '@/components/ui/toast';
+import { cn } from '@/lib/utils';
 
 type MatchDialogProps = {
   open: boolean;
@@ -96,7 +97,7 @@ export function MatchDialog({ open, onOpenChange, term }: MatchDialogProps) {
 
         <SheetFooter className="gap-2 sm:justify-start">
             {!explanation && !isLoading && (
-                <Button onClick={handleLearnMore}>
+                <Button onClick={handleLearnMore} className={cn(!explanation && !isLoading && "animate-pulse-primary")}>
                     <Gem className="mr-2 h-4 w-4" />
                     Learn More
                 </Button>
