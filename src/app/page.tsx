@@ -199,6 +199,7 @@ export default function Home() {
 
   return (
     <div className={cn("min-h-screen w-full bg-background bg-grid bg-gradient-radial-background", (dialogState !== 'none') && 'h-screen overflow-hidden')}>
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <Confetti active={showConfetti} onComplete={() => setShowConfetti(false)} />
       <div
         aria-live="polite"
@@ -210,7 +211,7 @@ export default function Home() {
       <div className="min-h-screen">
         <PageHeader />
 
-        <main className="flex-grow flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pb-48">
+        <main id="main-content" className="flex-grow flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pb-48">
           <div className="w-full max-w-5xl flex flex-col items-center">
             {!hasGameData ? (
                 <EmptyState />

@@ -58,6 +58,15 @@
   }
 }
 
+@layer components {
+  .skip-link {
+    @apply sr-only;
+  }
+  .skip-link:focus {
+    @apply not-sr-only absolute top-4 left-4 z-50 rounded-md bg-background p-3 font-semibold text-foreground ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
 @layer utilities {
   .text-glow-primary {
     text-shadow:
