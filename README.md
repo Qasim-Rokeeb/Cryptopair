@@ -6,7 +6,7 @@ CryptoPair is an interactive and educational matching game designed to help user
 
 The game is built with a modern tech stack, featuring a responsive and visually appealing interface that saves user progress, allowing players to pick up where they left off. With multiple levels of increasing difficulty, CryptoPair offers a progressive learning curve for both newcomers and those familiar with the crypto space.
 
-More features to be added.
+More features to be added, anticipate!!!
 
 ## How to Play
 
