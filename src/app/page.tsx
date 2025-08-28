@@ -15,6 +15,7 @@ import { cn } from '@/lib/utils';
 import { Confetti } from '@/components/game/Confetti';
 import { EmptyState } from '@/components/game/EmptyState';
 import { ParallaxStars } from '@/components/game/ParallaxStars';
+import { Badge } from '@/components/ui/badge';
 
 export type GameCardData = {
   id: string;
@@ -188,20 +189,23 @@ export default function Home() {
     )
   }
   
-  const PageHeader = ({ isScrolled }: { isScrolled: boolean }) => (
+  const PageHeader = ({ isScrolled, matchedPairs, totalPairs }: { isScrolled: boolean, matchedPairs: number, totalPairs: number }) => (
     <header className={cn(
-        "w-full sticky top-0 z-20 transition-all duration-300",
+        "w-full sticky top-0 z-20 transition-all duration-300 ease-out",
         isScrolled ? 'py-2 bg-background/80 backdrop-blur-lg shadow-md border-b border-border' : 'py-8 sm:py-12'
     )}>
         <div className="max-w-5xl mx-auto px-4 flex justify-center items-center relative">
-            <div className="text-center transition-all duration-300">
+            <div className="text-center transition-all duration-300 ease-out">
                 <div className="flex items-center justify-center gap-2 sm:gap-4 mb-2">
-                    <Coins className={cn("text-primary text-glow-primary transition-all duration-300", isScrolled ? 'w-8 h-8' : 'w-10 h-10')} />
-                    <h1 className={cn("font-headline font-bold text-glow-primary transition-all duration-300", isScrolled ? 'text-2xl' : 'text-4xl')}>
+                    <Coins className={cn("text-primary text-glow-primary transition-all duration-300 ease-out", isScrolled ? 'w-8 h-8' : 'w-10 h-10')} />
+                    <h1 className={cn("font-headline font-bold text-glow-primary transition-all duration-300 ease-out", isScrolled ? 'text-2xl' : 'text-4xl')}>
                         CryptoPair
                     </h1>
+                    <Badge variant="secondary" className={cn("transition-all duration-300 ease-out", isScrolled ? "scale-100" : "scale-0")}>
+                        {matchedPairs} / {totalPairs}
+                    </Badge>
                 </div>
-                <p className={cn("text-muted-foreground transition-all duration-300", isScrolled ? 'text-xs h-0 opacity-0 -translate-y-2' : 'text-base h-auto opacity-100 translate-y-0')}>
+                <p className={cn("text-muted-foreground transition-all duration-300 ease-out", isScrolled ? 'text-xs h-0 opacity-0 -translate-y-2' : 'text-base h-auto opacity-100 translate-y-0')}>
                     Match the crypto terms with their definitions.
                 </p>
             </div>
@@ -225,7 +229,7 @@ export default function Home() {
       </div>
 
       <div className="min-h-screen">
-        <PageHeader isScrolled={isScrolled} />
+        <PageHeader isScrolled={isScrolled} matchedPairs={matchedPairs} totalPairs={totalPairs} />
 
         <main id="main-content" className="flex-grow flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pb-48">
           <div className="w-full max-w-5xl flex flex-col items-center">
@@ -234,7 +238,7 @@ export default function Home() {
             ) : cards.length > 0 ? (
                 <GameBoard cards={cards} onCardClick={handleCardClick} isDisabled={isChecking} mismatchedCards={mismatchedCards} />
             ) : (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 w-full">
                     {Array.from({ length: 8 }).map((_, i) => (
                         <Skeleton key={i} className="h-48 w-full" />
                     ))}
