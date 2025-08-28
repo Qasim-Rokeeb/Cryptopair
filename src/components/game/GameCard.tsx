@@ -61,7 +61,7 @@ export function GameCard({ card, isFlipped, isMatched, isMismatched, onClick, is
 
   return (
     <div 
-      className={cn("p-1.5 animate-card-enter rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background", isMismatched && "animate-shake")} 
+      className={cn("group p-1.5 animate-card-enter rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background", isMismatched && "animate-shake")} 
       onClick={handleClick} 
       onKeyDown={handleKeyDown}
       tabIndex={isMatched || isDisabled ? -1 : 0}
@@ -77,7 +77,7 @@ export function GameCard({ card, isFlipped, isMatched, isMismatched, onClick, is
       >
         {/* Front of card */}
         <div className="absolute w-full h-full backface-hidden rounded-lg bg-secondary/50 dark:bg-white/5 dark:backdrop-blur-lg border-2 border-primary/20 flex items-center justify-center p-4 hover:border-primary transition-colors">
-          <Icon name={card.icon} className="w-16 h-16 text-primary dark:opacity-100" />
+          <Icon name={card.icon} className="w-16 h-16 text-primary dark:opacity-100 transition-transform duration-300 ease-in-out group-hover:scale-110" />
         </div>
         {/* Back of card */}
         <div
