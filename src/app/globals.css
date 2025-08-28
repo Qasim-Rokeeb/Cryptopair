@@ -231,7 +231,7 @@
   }
 
   .animate-sparkle {
-    animation: sparkle 1.5s ease-in-out;
+    animation: sparkle 1.5s ease-out;
   }
 
   @keyframes sparkle {
@@ -264,7 +264,7 @@
   }
 
   .bounce-in {
-      animation: bounce-in 0.5s ease;
+      animation: bounce-in 0.5s ease-out;
   }
 
   @keyframes bounce-in {
