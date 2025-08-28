@@ -14,6 +14,7 @@ import { ThemeToggle } from '@/components/theme-toggle';
 import { cn } from '@/lib/utils';
 import { Confetti } from '@/components/game/Confetti';
 import { EmptyState } from '@/components/game/EmptyState';
+import { ParallaxStars } from '@/components/game/ParallaxStars';
 
 export type GameCardData = {
   id: string;
@@ -213,6 +214,7 @@ export default function Home() {
 
   return (
     <div className={cn("min-h-screen w-full bg-background bg-grid bg-gradient-radial-background", (dialogState !== 'none') && 'h-screen overflow-hidden')}>
+      <ParallaxStars />
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <Confetti active={showConfetti} onComplete={() => setShowConfetti(false)} />
       <div
